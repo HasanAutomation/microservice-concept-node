@@ -21,11 +21,17 @@ app.post('/events', (req, res) => {
     });
   }
   if (type === 'CommentCreated') {
-    const { postId } = data;
+    const { postId, status } = data;
 
-    const post = posts.find(post => post.id === postId);
+    const post = posts.find((post) => post.id === postId);
 
-    post.comments.push(data);
+    post.comments.push({ ...data, status });
+  }
+  if (type === 'CommentUpdated') {
+    const { postId, status, id } = data;
+    const post = posts.find((post) => post.id === postId);
+    const comment = post.comments.find((cmt) => cmt.id === id);
+    comment.status = status;
   }
 
   res.send({ ok: true });
