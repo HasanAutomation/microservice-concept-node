@@ -36,5 +36,4 @@ app.post('/events', (req, res) => {
 
   res.send({ ok: true });
 });
-
 app.listen(4002, () => console.log('Query service is running on 4002'));
